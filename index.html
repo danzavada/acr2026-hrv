@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACR 2026 Poster</title>
+<style>
+  html, body { margin:0; background:#fff; color:#1b2430; }
+  body { min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; justify-content:center; gap:20px; padding:32px 16px; box-sizing:border-box; max-width:560px; margin:0 auto; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  h1 { margin:0; font-size:1.5rem; line-height:1.3; color:#1d5ba6; }
+  p { margin:0 0 12px; font-size:1rem; line-height:1.5; color:#4a5563; }
+  .btn { display:flex; align-items:center; justify-content:center; min-height:110px; border:0; border-radius:20px; background:#1d5ba6; color:#fff; font-family:inherit; font-size:1.9rem; font-weight:700; line-height:1.2; text-decoration:none; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .btn:active { background:#164a88; }
+  .btn.secondary { min-height:80px; font-size:1.4rem; background:#fff; color:#1d5ba6; border:3px solid #1d5ba6; }
+  .btn.secondary:active { background:#eef3fa; }
+  .btn[hidden] { display:none; }
+</style>
+</head>
+<body>
+<h1>Reduced Heart Rate Variability Links to Subclinical Atherosclerosis in Systemic Sclerosis and Idiopathic Inflammatory Myopathies</h1>
+<p>Daniel Zavada, Sabina Hrabe Oreska, Aneta Prokopcova, Hana Wunsch, Jaroslav Kudlicka, Vladimir Tuka, Ondrej Mikes, Zdislava Krupickova, Martin Satny, Eva Chytilova, Jan Kvasnicka, Maja Spiritovic, Barbora Vala, Petr Cesak, Marian Rybar, Karel Pavelka, Ladislav Senolt, Radim Becvar, Michal Vrablik, Jiri Vencovsky, Michal Tomcik</p>
+<button id="gallery" class="btn" type="button" hidden>Add to gallery</button>
+<a id="png" class="btn" href="ACR2026_HRV_SSc_IIM_poster.png" download="ACR2026_HRV_SSc_IIM_poster.png">Download PNG</a><script>
+(function () {
+  var NAME = "ACR2026_HRV_SSc_IIM_poster.png";
+  var btn = document.getElementById("gallery");
+  var file = null;
+  var isPhone = window.matchMedia("(pointer: coarse)").matches;
+  if (!isPhone || !navigator.canShare) return;
+
+  // Prefetch so navigator.share() runs directly inside the tap (iOS requires it).
+  fetch(document.getElementById("png").getAttribute("href"))
+    .then(function (r) { return r.blob(); })
+    .then(function (blob) {
+      file = new File([blob], NAME, { type: "image/png" });
+      if (navigator.canShare({ files: [file] })) {
+        btn.hidden = false;
+        document.getElementById("png").classList.add("secondary");
+      }
+    });
+
+  btn.addEventListener("click", function () {
+    navigator.share({ files: [file] }).catch(function () {});
+  });
+})();
+</script>
+</body>
+</html>
